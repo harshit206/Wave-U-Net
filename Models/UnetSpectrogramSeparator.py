@@ -49,11 +49,11 @@ class UnetSpectrogramSeparator:
         '''
         # Setup STFT computation
         window = functools.partial(window_ops.hann_window, periodic=True)
-        inv_window = tf.contrib.signal.inverse_stft_window_fn(self.hop, forward_window_fn=window)
+        inv_window = tf.signal.inverse_stft_window_fn(self.hop, forward_window_fn=window)
         with tf.variable_scope("separator", reuse=reuse):
             # Compute spectrogram
             assert(input.get_shape().as_list()[2] == 1) # Model works ONLY on mono
-            stfts = tf.contrib.signal.stft(tf.squeeze(input, 2), frame_length=self.frame_len, frame_step=self.hop, fft_length=self.frame_len, window_fn=window)
+            stfts = tf.signal.stft(tf.squeeze(input, 2), frame_length=self.frame_len, frame_step=self.hop, fft_length=self.frame_len, window_fn=window)
             mix_mag = tf.abs(stfts)
             mix_angle = tf.angle(stfts)
 
@@ -101,7 +101,7 @@ class UnetSpectrogramSeparator:
                 # Reconstruct audio
                 for source_name in mags.keys():
                     stft = tf.multiply(tf.complex(mags[source_name], 0.0), tf.exp(tf.complex(0.0, mix_angle)))
-                    audio = tf.contrib.signal.inverse_stft(stft, self.frame_len, self.hop, self.frame_len, window_fn=inv_window)
+                    audio = tf.signal.inverse_stft(stft, self.frame_len, self.hop, self.frame_len, window_fn=inv_window)
 
                     # Reshape to [batch_size, samples, 1]
                     audio = tf.expand_dims(audio, 2)
