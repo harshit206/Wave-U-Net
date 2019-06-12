@@ -219,7 +219,7 @@ def get_path(db_path, instrument_node):
     return db_path + os.path.sep + instrument_node.xpath("./relativeFilepath")[0].text
 
 def getMUSDB(database_path):
-    mus = musdb.DB(root_dir=database_path, is_wav=False)
+    mus = musdb.DB(root_dir=database_path, is_wav=True)
 
     subsets = list()
 
