@@ -6,12 +6,12 @@ config_ingredient = Ingredient("cfg")
 @config_ingredient.config
 def cfg():
     # Base configuration
-    model_config = {"musdb_path" : "/mnt/windaten/Datasets/MUSDB18/", # SET MUSDB PATH HERE, AND SET CCMIXTER PATH IN CCMixter.xml
-                    "estimates_path" : "/mnt/windaten/Source_Estimates", # SET THIS PATH TO WHERE YOU WANT SOURCE ESTIMATES PRODUCED BY THE TRAINED MODEL TO BE SAVED. Folder itself must exist!
-                    "data_path" : "data", # Set this to where the preprocessed dataset should be saved
+    model_config = {"musdb_path" : "/content/root/", # SET MUSDB PATH HERE, AND SET CCMIXTER PATH IN CCMixter.xml
+                    "estimates_path" : "/content/root/Source_Estimates", # SET THIS PATH TO WHERE YOU WANT SOURCE ESTIMATES PRODUCED BY THE TRAINED MODEL TO BE SAVED. Folder itself must exist!
+                    "data_path" : "/content/root/preprocessed_data", # Set this to where the preprocessed dataset should be saved
 
-                    "model_base_dir" : "checkpoints", # Base folder for model checkpoints
-                    "log_dir" : "logs", # Base folder for logs files
+                    "model_base_dir" : "/content/root/checkpoints", # Base folder for model checkpoints
+                    "log_dir" : "/content/root/logs", # Base folder for logs files
                     "batch_size" : 16, # Batch size
                     "init_sup_sep_lr" : 1e-4, # Supervised separator learning rate
                     "epoch_it" : 2000, # Number of supervised separator steps per epoch
