@@ -207,7 +207,7 @@ def get_dataset(model_config, input_shape, output_shape, partition):
     dataset = dataset.map(lambda x : Utils.crop_sample(x, (input_shape[1] - output_shape[1])//2)).prefetch(100)
 
     if partition == "train": # Repeat endlessly and shuffle when training
-        dataset = dataset.repeat()
+        #dataset = dataset.repeat()
         dataset = dataset.shuffle(buffer_size=model_config["cache_size"])
 
     dataset = dataset.apply(tf.contrib.data.batch_and_drop_remainder(model_config["batch_size"]))
