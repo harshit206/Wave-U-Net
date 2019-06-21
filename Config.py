@@ -6,18 +6,18 @@ config_ingredient = Ingredient("cfg")
 @config_ingredient.config
 def cfg():
     # Base configuration
-    model_config = {"musdb_path" : "/content/root/", # SET MUSDB PATH HERE, AND SET CCMIXTER PATH IN CCMixter.xml
-                    "estimates_path" : "/content/root/Source_Estimates", # SET THIS PATH TO WHERE YOU WANT SOURCE ESTIMATES PRODUCED BY THE TRAINED MODEL TO BE SAVED. Folder itself must exist!
-                    "data_path" : "/content/root/preprocessed_data", # Set this to where the preprocessed dataset should be saved
+    model_config = {"musdb_path" : "/home/harshit.singh/Audio_Separation/source", # SET MUSDB PATH HERE, AND SET CCMIXTER PATH IN CCMixter.xml
+                    "estimates_path" : "/home/harshit.singh/Audio_Separation/source/Source_Estimates", # SET THIS PATH TO WHERE YOU WANT SOURCE ESTIMATES PRODUCED BY THE TRAINED MODEL TO BE SAVED. Folder itself must exist!
+                    "data_path" : "/home/harshit.singh/Audio_Separation/source/preprocessed_data", # Set this to where the preprocessed dataset should be saved
 
-                    "model_base_dir" : "/content/root/checkpoints", # Base folder for model checkpoints
-                    "log_dir" : "/content/root/logs", # Base folder for logs files
-                    "batch_size" : 1, # Batch size
+                    "model_base_dir" : "/home/harshit.singh/Audio_Separation/source/checkpoints", # Base folder for model checkpoints
+                    "log_dir" : "/home/harshit.singh/Audio_Separation/source/logs", # Base folder for logs files
+                    "batch_size" : 16, # Batch size
                     "init_sup_sep_lr" : 1e-4, # Supervised separator learning rate
                     "epoch_it" : 2000, # Number of supervised separator steps per epoch
-                    'cache_size': 3000, # Number of audio snippets buffered in the random shuffle queue. Larger is better, since workers put multiple examples of one song into this queue. The number of different songs that is sampled from with each batch equals cache_size / num_snippets_per_track. Set as high as your RAM allows.
+                    'cache_size': 4000, # Number of audio snippets buffered in the random shuffle queue. Larger is better, since workers put multiple examples of one song into this queue. The number of different songs that is sampled from with each batch equals cache_size / num_snippets_per_track. Set as high as your RAM allows.
                     'num_workers' : 4, # Number of processes used for each TF map operation used when loading the dataset
-                    "num_snippets_per_track" : 250, # Number of snippets that should be extracted from each song at a time after loading it. Higher values make data loading faster, but can reduce the batches song diversity
+                    "num_snippets_per_track" : 100, # Number of snippets that should be extracted from each song at a time after loading it. Higher values make data loading faster, but can reduce the batches song diversity
                     'num_layers' : 12, # How many U-Net layers
                     'filter_size' : 15, # For Wave-U-Net: Filter size of conv in downsampling block
                     'merge_filter_size' : 5, # For Wave-U-Net: Filter size of conv in upsampling block
